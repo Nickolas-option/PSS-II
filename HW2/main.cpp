@@ -1,176 +1,9 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
-enum AccessLevel {
-    noLevel = 0,
-    greenLevel = 1,
-    yellowLevel = 2,
-    redLevel = 3,
-};
-
-class User {
-public:
-    AccessLevel getCard() {
-        return this->card;
-    }
-
-    string getname() {
-        return name;
-    }
-
-protected:
-    AccessLevel card;
-    string name;
-
-    friend class Admin;
-};
-
-class Professor : public User {
-public:
-    Professor(string name) {
-        this->name = name;
-        this->card = yellowLevel;
-    }
-
-    Professor(string name, string joke) : Professor(name) {
-        this->joke = joke;
-    }
-
-    ~Professor() = default;
-
-    string tellJoke() {
-        return joke + "\n";
-    };
-private:
-    string joke = "No joke yet\n";
-    string universityPosition = "Prof.";
-};
-
-class Student : public User {
-public:
-    Student(string name) {
-        this->name = name;
-        this->card = noLevel;
-    }
-
-    Student(string name, int roomNumber) : Student(name) {
-        dormRoomNumber = roomNumber;
-    }
-
-    string complain(string subject = "stipa") {
-        if (subject == "stipa") {
-            return "Why stipa is so small? :(\n";
-        } else {
-            return name + ": I am not happy with " + subject + "!\n";
-        }
-    }
-
-    string IntroduceYourself() {
-        return "I am " + name + ". I live in campus room number " + to_string(dormRoomNumber) + "\n";
-    }
-
-private:
-    int dormRoomNumber = 0;
-    string universityPosition = "a student";
-};
-
-class Director : public User {
-public:
-    Director(string name) {
-        this->name = name;
-        this->card = redLevel;
-    }
-
-private:
-    string universityPosition = "the director";
-};
-
-class LabEmployee : public User {
-public:
-    LabEmployee(string name) {
-        this->name = name;
-        this->card = greenLevel;
-    }
-
-private:
-    string universityPosition = "a lab employee";
-};
-
-class Admin : public User {
-public:
-    Admin(string name) {
-        this->name = name;
-        this->card = redLevel;
-    }
-
-    void grantAccess(User* person, AccessLevel level) {
-        person->card = level;
-    }
-
-private:
-    string universityPosition = "an admin";
-};
-
-class Room {
-public:
-    Room() = default;
-
-    ~Room() = default;
-
-    Room(int number) {
-        roomNumber = number;
-    }
-
-    string getRoomNumber() {
-        return to_string(roomNumber);
-    }
-
-    string tryToEnter(User person) {
-        if (person.getCard() >= accessNeeded) {
-            return person.getname() + " entered the room number " + to_string(roomNumber) + "\n";
-        }
-        return person.getname() + " tried to enter the room number "
-               + to_string(roomNumber) + ", but got no access\n";
-    }
-
-protected:
-    AccessLevel accessNeeded;
-    int roomNumber;
-};
-
-class LectureRoom : public Room {
-public:
-    LectureRoom(int number, AccessLevel accessNeeded = noLevel) {
-        this->roomNumber = number;
-        this->accessNeeded = accessNeeded;
-    }
-};
-
-class ConferenceRoom : public Room {
-public:
-    ConferenceRoom(int number, AccessLevel accessNeeded = yellowLevel) {
-        this->roomNumber = number;
-        this->accessNeeded = accessNeeded;
-    }
-};
-
-class Cabinet : public Room {
-public:
-    Cabinet(int number, AccessLevel accessNeeded = noLevel) {
-        this->roomNumber = number;
-        this->accessNeeded = accessNeeded;
-    }
-};
-
-class DirectorCabinet : public Room {
-public:
-    DirectorCabinet(int number, AccessLevel accessNeeded = redLevel) {
-        this->roomNumber = number;
-        this->accessNeeded = accessNeeded;
-    }
-
-};
+#include "Room.h"
 
 
 int main() {
@@ -220,29 +53,31 @@ int main() {
     auto room6 = Cabinet(408);
     auto room7 = Cabinet(409);
 
-    cout << "Trying to enter Director Room\n";
+    cout << "\n###Trying to enter Director Room\n\n";
     cout << directorRoom.tryToEnter(NikitaAdmin);
     cout << directorRoom.tryToEnter(Tormasov);
     cout << directorRoom.tryToEnter(ProfShilov);
     cout << directorRoom.tryToEnter(Lab2);
     cout << directorRoom.tryToEnter(Stud2);
 
-    cout << "\nTrying to enter Conference Room\n";
+    cout << "\n\n###Trying to enter Conference Room\n\n";
     cout << room3.tryToEnter(NikitaAdmin);
     cout << room3.tryToEnter(Tormasov);
     cout << room3.tryToEnter(ProfShilov);
     cout << room3.tryToEnter(Lab2);
     cout << room3.tryToEnter(Stud2);
 
-    cout << "\nTrying to enter Lecture \n";
+    cout << "\n\n###Trying to enter Lecture \n\n";
     cout << room4.tryToEnter(NikitaAdmin);
     cout << room4.tryToEnter(Tormasov);
     cout << room4.tryToEnter(ProfShilov);
     cout << room4.tryToEnter(Lab2);
     cout << room4.tryToEnter(Stud2);
+    cout << '\n';
 
     cout << room3.tryToEnter(Stud2);
-    NikitaAdmin.grantAccess(&Stud2,yellowLevel);
+    NikitaAdmin.grantAccess(&Stud2, yellowLevel);
+    cout << "###Now admin with give " + Stud2.getname() + " access of yellow level...\n";
     cout << room3.tryToEnter(Stud2);
 
 
