@@ -1,13 +1,8 @@
-//
-// Created by nikae on 08.03.2021.
-//
+#include "Emergency.h"
+#ifndef HW3_ROOM_H
+#define HW3_ROOM_H
 
-#include "User.h"
-
-#ifndef HW2_ROOM_H
-#define HW2_ROOM_H
-
-#endif //HW2_ROOM_H
+#endif //HW3_ROOM_H
 
 class Room {
 public:
@@ -15,30 +10,35 @@ public:
 
     ~Room() = default;
 
-    Room(int number);
+    [[maybe_unused]] explicit Room(int number);
 
-    string getRoomNumber();
+    string getRoomNumber() const;
 
-    string tryToEnter(User person);
+    string tryToEnter(User &person);
 
 protected:
     AccessLevel accessNeeded;
     int roomNumber;
+
+    virtual AccessLevel checkLevel();
 };
 
 class LectureRoom : public Room {
 public:
-    LectureRoom(int number, AccessLevel accessNeeded = noLevel);
+    LectureRoom(int number, AccessLevel accessNeeded = blueLevel);
 };
 
 class ConferenceRoom : public Room {
 public:
     ConferenceRoom(int number, AccessLevel accessNeeded = yellowLevel);
+
+private:
+    AccessLevel checkLevel();
 };
 
 class Cabinet : public Room {
 public:
-    Cabinet(int number, AccessLevel accessNeeded = noLevel);
+    Cabinet(int number, AccessLevel accessNeeded = greenLevel);
 };
 
 class DirectorCabinet : public Room {

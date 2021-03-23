@@ -1,30 +1,44 @@
-//
-// Created by nikae on 07.03.2021.
-//
-#ifndef HW2_USER_H
-#define HW2_USER_H
+#ifndef HW3_USER_H
+#define HW3_USER_H
+#endif //HW3_USER_H
 
-#endif //HW2_USER_H
+#include <set>
 using namespace std;
 
 enum AccessLevel {
-    noLevel = 0,
+    tempEmergencyAccess = -1,
+    blueLevel = 0,
     greenLevel = 1,
     yellowLevel = 2,
     redLevel = 3,
 };
 
+struct Card {
+    set<int> availableRooms;
+    AccessLevel cardLevel;
+};
+
 class User {
 public:
-    AccessLevel getCard();
+    Card &getCard();
 
-    string getname();
+    string getName();
 
 protected:
-    AccessLevel card;
+    Card card;
     string name;
 
     friend class Admin;
+};
+
+class Guest : public User {
+public:
+    Guest(string name);
+
+    ~Guest() = default;
+
+private:
+    string universityPosition = "Guest";
 };
 
 class Professor : public User {
@@ -77,7 +91,11 @@ class Admin : public User {
 public:
     Admin(string name);
 
-    void grantAccess(User *person, AccessLevel level);
+    void grantAccess(User &person, AccessLevel level);
+
+    void grantAccess(User &person, int roomNumber);
+
+    void removeAccess(User &person, int roomNumber);
 
 private:
     string universityPosition = "an admin";

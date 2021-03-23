@@ -1,22 +1,21 @@
-//
-// Created by nikae on 07.03.2021.
-//
-
 #include <string>
+#include <vector>
+#include <set>
 #include "User.h"
 
 
-AccessLevel User::getCard() {
+Card &User::getCard() {
     return this->card;
 }
 
-string User::getname() {
+string User::getName() {
     return name;
 }
 
+
 Professor::Professor(string name) {
     this->name = name;
-    this->card = yellowLevel;
+    this->card.cardLevel = yellowLevel;
 }
 
 Professor::Professor(string name, string joke) : Professor(name) {
@@ -30,7 +29,7 @@ string Professor::tellJoke() {
 
 Student::Student(string name) {
     this->name = name;
-    this->card = noLevel;
+    this->card.cardLevel = blueLevel;
 }
 
 Student::Student(string name, int roomNumber) : Student(name) {
@@ -52,20 +51,34 @@ string Student::IntroduceYourself() {
 
 Director::Director(string name) {
     this->name = name;
-    this->card = redLevel;
+    this->card.cardLevel = redLevel;
 }
 
 
 LabEmployee::LabEmployee(string name) {
     this->name = name;
-    this->card = greenLevel;
+    this->card.cardLevel = greenLevel;
 }
+
 
 Admin::Admin(string name) {
     this->name = name;
-    this->card = redLevel;
+    this->card.cardLevel = redLevel;
 }
 
-void Admin::grantAccess(User *person, AccessLevel level) {
-    person->card = level;
+void Admin::grantAccess(User &person, AccessLevel level) {
+    person.card.cardLevel = level;
 }
+
+void Admin::grantAccess(User &person, int roomNumber) {
+    person.card.availableRooms.insert(roomNumber);
+}
+
+void Admin::removeAccess(User &person, int roomNumber) {
+    person.card.availableRooms.erase(roomNumber);
+}
+
+Guest::Guest(string name) {
+    this->name = name;
+}
+
