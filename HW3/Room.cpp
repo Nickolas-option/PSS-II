@@ -15,9 +15,10 @@ string Room::tryToEnter(User &person) {
     Card &personCard = person.getCard();
     auto &personLevel = personCard.cardLevel;
     auto &personRooms = personCard.availableRooms;
-    if (Emergency::isEmergency() ||
-        personLevel >= checkLevel() ||
-        personRooms.find(roomNumber) != personRooms.cend()) {
+    bool shouldOpenRoom = Emergency::isEmergency() ||
+                          personLevel >= checkLevel() ||
+                          personRooms.find(roomNumber) != personRooms.cend();
+    if (shouldOpenRoom) {
         return person.getName() + " entered the room number " + to_string(roomNumber) + "\n";
     }
     return person.getName() + " tried to enter the room number "
