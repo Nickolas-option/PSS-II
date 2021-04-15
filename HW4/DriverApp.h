@@ -1,11 +1,7 @@
-//
-// Created by nikae on 14.04.2021.
-//
 
 #ifndef WENDEX_DRIVERAPP_H
 #define WENDEX_DRIVERAPP_H
 
-#endif //WENDEX_DRIVERAPP_H
 
 #include "string"
 #include "vector"
@@ -23,11 +19,16 @@ enum Status {
 class DriverApp {
 public:
     void connectToApp(string password); //TODO implement authorization
-
+    Status getStatus();
 private:
     string name;
     string rating;
     vector<string> orderHistory;
     Car *car;
     Status status;
+
+    friend class DriverGateway;
+    friend class PassengerGateway;
 };
+
+#endif //WENDEX_DRIVERAPP_H

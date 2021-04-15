@@ -1,19 +1,19 @@
-//
-// Created by nikae on 14.04.2021.
-//
-
-#include <string>
-#include "vector"
 
 #ifndef WENDEX_PASSENGERAPP_H
 #define WENDEX_PASSENGERAPP_H
 
-#endif //WENDEX_PASSENGERAPP_H
+#include <string>
+#include "vector"
+#include <iostream>
+
 using namespace std;
+
 
 class PassengerApp {
 public:
     PassengerApp(string name, string password, int id);
+
+    int getId();
 
     void connectToApp(string password);
 
@@ -24,4 +24,8 @@ private:
     vector<string> pinnedAddresses;
     string password;
 
+    friend class PassengerGateway;
+    friend class DriverGateway;
 };
+
+#endif //WENDEX_PASSENGERAPP_H

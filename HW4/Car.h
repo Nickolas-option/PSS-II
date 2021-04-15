@@ -1,22 +1,22 @@
-//
-// Created by nikae on 14.04.2021.
-//
 
 #ifndef WENDEX_CAR_H
 #define WENDEX_CAR_H
-
-#endif //WENDEX_CAR_H
-
 #include "string"
+#include "vector"
 
-enum CarType {
-    Economy, Comfort, ComfortPlus, Business
-};
+
+using namespace std;
+
 
 class Car {
 public:
     Car() = default;
 
+    enum CarType {
+        Economy, Comfort, ComfortPlus, Business
+    };
+
+    static string printCarType(CarType carType);
 protected:
     std::string model;
     CarType Type;
@@ -51,3 +51,4 @@ public:
     ComfortPlusCar();
 };
 
+#endif //WENDEX_CAR_H

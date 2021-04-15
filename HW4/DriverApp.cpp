@@ -1,5 +1,6 @@
-//
-// Created by nikae on 14.04.2021.
-//
 
 #include "DriverApp.h"
+
+Status DriverApp::getStatus() {
+    return status;
+}

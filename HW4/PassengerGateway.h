@@ -1,40 +1,36 @@
-//
-// Created by nikae on 14.04.2021.
-//
 
 #ifndef WENDEX_PASSENGERGATEWAY_H
 #define WENDEX_PASSENGERGATEWAY_H
 
-#endif //WENDEX_PASSENGERGATEWAY_H
-
 #include "vector"
 #include "string"
-#include "Car.h"
 #include "Order.h"
 #include "PassengerApp.h"
+#include "Car.h"
 
 using namespace std;
 
 class PassengerGateway {
-private:
-    static vector<vector<Order>> PassengersOrderHistories;
-    static vector<int> PassengersList;
+public:
+    inline static vector<vector<Order>> PassengersOrderHistories {};
+    inline static vector<int> PassengersList {};
 
     std::vector<Order> seeOrderHistory(PassengerApp *Passenger);
 
     std::vector<std::string> seeUpdatePaymentMethods(PassengerApp *Passenger);
 
-    std::vector<std::string> seeUpdatePaymentMethods(PassengerApp *Passenger, std::vector<std::string>);
+    std::vector<std::string> seeUpdatePaymentMethods(PassengerApp *Passenger, std::vector<std::string> newMethods);
 
     std::vector<std::string> seeUpdatePinnedAddresses(PassengerApp *Passenger);
 
-    std::vector<std::string> seeUpdatePinnedAddresses(PassengerApp *Passenger, std::vector<std::string>);
+    std::vector<std::string> seeUpdatePinnedAddresses(PassengerApp *Passenger, std::vector<std::string>
+            newPinnedAddresses);
 
-    std::pair<int, int> CheckRide(PassengerApp *Passenger, std::string, std::string, CarType);
+    void CheckRide(PassengerApp *Passenger, std::string from, std::string to, Car::CarType);
 
-    void OrderRide(PassengerApp *Passenger, std::string, std::string, CarType);
+    void OrderRide(PassengerApp *Passenger, std::string from, std::string to, Car::CarType, int price);
 
-    std::string ChangePayMethodTemp(PassengerApp *Passenger, std::string);
+    std::string ChangePayMethodTemp(PassengerApp *Passenger, std::string TempPayMethod);
 
     std::pair<int, int> WhereIsCar(PassengerApp *Passenger);
 
@@ -42,3 +38,5 @@ private:
 
     friend PassengerApp;
 };
+#endif //WENDEX_PASSENGERGATEWAY_H
+

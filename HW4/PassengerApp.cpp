@@ -1,11 +1,7 @@
-//
-// Created by nikae on 14.04.2021.
-//
 
-#include <iostream>
 #include "PassengerApp.h"
-#include "Order.h"
-class PassengerGateway;
+#include "PassengerGateway.h"
+
 PassengerApp::PassengerApp(string name, string password, int id) {
     this->name = name;
     this->password = password;
@@ -16,8 +12,12 @@ PassengerApp::PassengerApp(string name, string password, int id) {
 
 void PassengerApp::connectToApp(string password) {
     if (password == this->password) {
-        std::cout << "Successful authorization.";
+        std::cout << "Successful authorization.\n";
     } else {
-        std::cout << "Wrong password. NULL pointer returned";
+        std::cout << "Wrong password. NULL pointer returned\n";
     }
+}
+
+int PassengerApp::getId() {
+    return this->id;
 }

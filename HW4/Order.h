@@ -1,6 +1,3 @@
-//
-// Created by nikae on 14.04.2021.
-//
 
 #ifndef WENDEX_ORDER_H
 #define WENDEX_ORDER_H

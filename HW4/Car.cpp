@@ -1,7 +1,3 @@
-//
-// Created by nikae on 14.04.2021.
-//
-
 #include "Car.h"
 
 ComfortCar::ComfortCar(int bottle) {
@@ -19,4 +15,16 @@ ComfortPlusCar::ComfortPlusCar() {
 
 BusinessCar::BusinessCar() {
     Type = Business;
+}
+
+string Car::printCarType(Car::CarType carType) {
+    if (carType == CarType::Business) {
+        return "Business";
+    } else if (carType == CarType::ComfortPlus) {
+        return "ComfortPlus";
+    } else if (carType == CarType::Comfort) {
+        return "Comfort";
+    } else {
+        return "Econom";
+    };
 }
