@@ -1,33 +1,37 @@
-
 #ifndef WENDEX_DRIVERAPP_H
 #define WENDEX_DRIVERAPP_H
 
-
 #include "string"
 #include "vector"
+#include "Car.h"
 
 using namespace std;
 
-class Car;
-
 enum Status {
-    workingAndFree,
-    workingAndBusy,
+    available,
+    busy,
     notWorking
 };
 
 class DriverApp {
 public:
-    void connectToApp(string password); //TODO implement authorization
+    DriverApp(string name, string password, int id);
+
+    void connectToApp(string password);
+
     Status getStatus();
+
 private:
     string name;
-    string rating;
+    int id;
+    int rating;
     vector<string> orderHistory;
     Car *car;
     Status status;
+    string password;
 
     friend class DriverGateway;
+
     friend class PassengerGateway;
 };
 

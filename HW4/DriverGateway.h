@@ -11,10 +11,10 @@ using namespace std;
 
 class DriverGateway {
 public:
-    inline static vector<DriverApp> driversList {};
-    inline static vector<vector<Order>> driversOrderHistories {};
+    inline static vector<DriverApp *> driversList{};
+    inline static vector<vector<Order>> driversOrderHistories{};
 
-    vector<Order> seeOrderHistory(DriverApp *Driver);
+    static vector<Order> seeOrderHistory(DriverApp *Driver);
 
     void seeCar(DriverApp *Driver);
 

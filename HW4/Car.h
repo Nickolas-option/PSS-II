@@ -1,6 +1,7 @@
 
 #ifndef WENDEX_CAR_H
 #define WENDEX_CAR_H
+
 #include "string"
 #include "vector"
 
@@ -13,16 +14,21 @@ public:
     Car() = default;
 
     enum CarType {
-        Economy, Comfort, ComfortPlus, Business
+        Econom, Comfort, ComfortPlus, Business
     };
 
     static string printCarType(CarType carType);
+
 protected:
     std::string model;
     CarType Type;
     std::pair<int, int> coordinates;
     std::string color;
     int number;
+
+    friend class DriverApp;
+
+    friend class DriverGateway;
 };
 
 class ComfortCar : Car {

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Car.h"
 
 ComfortCar::ComfortCar(int bottle) {
@@ -6,7 +7,7 @@ ComfortCar::ComfortCar(int bottle) {
 }
 
 EconomyCar::EconomyCar() {
-    Type = Economy;
+    Type = Econom;
 }
 
 ComfortPlusCar::ComfortPlusCar() {
@@ -15,6 +16,10 @@ ComfortPlusCar::ComfortPlusCar() {
 
 BusinessCar::BusinessCar() {
     Type = Business;
+}
+
+void BusinessCar::parkRightInFrontOfTheEntrance() {
+    cout << "Parked right";
 }
 
 string Car::printCarType(Car::CarType carType) {

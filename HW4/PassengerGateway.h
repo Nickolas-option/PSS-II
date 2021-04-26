@@ -7,13 +7,16 @@
 #include "Order.h"
 #include "PassengerApp.h"
 #include "Car.h"
+#include "DriverApp.h"
+#include "DriverGateway.h"
+
 
 using namespace std;
 
 class PassengerGateway {
 public:
-    inline static vector<vector<Order>> PassengersOrderHistories {};
-    inline static vector<int> PassengersList {};
+    inline static vector<vector<Order>> PassengersOrderHistories{};
+    inline static vector<int> PassengersList{};
 
     std::vector<Order> seeOrderHistory(PassengerApp *Passenger);
 
@@ -24,7 +27,7 @@ public:
     std::vector<std::string> seeUpdatePinnedAddresses(PassengerApp *Passenger);
 
     std::vector<std::string> seeUpdatePinnedAddresses(PassengerApp *Passenger, std::vector<std::string>
-            newPinnedAddresses);
+    newPinnedAddresses);
 
     void CheckRide(PassengerApp *Passenger, std::string from, std::string to, Car::CarType);
 
@@ -38,5 +41,11 @@ public:
 
     friend PassengerApp;
 };
+
+void DriverGateway::updateStatus(DriverApp *Driver, Status newStatus) {
+    Driver->status = newStatus;
+}
+
+
 #endif //WENDEX_PASSENGERGATEWAY_H
 

@@ -25,6 +25,7 @@ private:
     string password;
 
     friend class PassengerGateway;
+
     friend class DriverGateway;
 };
 
